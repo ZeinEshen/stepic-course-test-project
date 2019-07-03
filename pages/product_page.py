@@ -11,3 +11,11 @@ class ProductPage(BasePage):
         product_name = self.browser.find_element(*ProductPageLocators.PRODUCT_NAME)
         add_to_cart_message = self.browser.find_element(*ProductPageLocators.ADD_TO_CART_MESSAGE)
         assert product_name.text == add_to_cart_message.text, "Wrong product added to cart"
+
+    def should_not_be_success_message(self):
+        assert self.is_not_element_present(*ProductPageLocators.SUCCESS_MESSAGE), \
+            "Success message is presented, but should not be"
+
+    def should_not_be_appeared_success_message(self):
+        assert self.is_disappeared(*ProductPageLocators.SUCCESS_MESSAGE), \
+            "Success message is appeared, but should not be"
