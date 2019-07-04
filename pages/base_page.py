@@ -4,7 +4,7 @@ from selenium.common.exceptions import NoAlertPresentException
 from selenium.webdriver.support.wait import WebDriverWait
 import math
 
-from pages.locators import BasePageLocators
+from pages.locators import BasePageLocators, MainPageLocators
 
 
 class BasePage(object):
@@ -57,3 +57,7 @@ class BasePage(object):
 
     def should_be_login_link(self):
         assert self.is_element_present(*BasePageLocators.LOGIN_LINK), "Login link is not presented"
+
+    def go_to_cart(self):
+        cart_button = self.browser.find_element(*MainPageLocators.CART_BUTTON)
+        cart_button.click()

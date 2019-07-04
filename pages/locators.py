@@ -2,7 +2,7 @@ from selenium.webdriver.common.by import By
 
 
 class MainPageLocators(object):
-    LOGIN_LINK = (By.ID, "login_link")
+    CART_BUTTON = (By.CSS_SELECTOR, ".basket-mini a")
 
 
 class BasePageLocators(object):
@@ -20,3 +20,8 @@ class ProductPageLocators(object):
     ADD_TO_CART_MESSAGE = (By.CSS_SELECTOR, ".alertinner strong")
     PRODUCT_NAME = (By.CSS_SELECTOR, ".product_main h1")
     SUCCESS_MESSAGE = (By.CLASS_NAME, "alert-success")
+
+
+class CartPageLocators(object):
+    EMPTY_CART_MESSAGE = (By.CSS_SELECTOR, "[id='content_inner'] p")
+    CART_ITEM = (By.ID, "basket-items")
