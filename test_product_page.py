@@ -24,6 +24,7 @@ class TestUserAddToCartFromProductPage(object):
         page.open()
         page.should_not_be_success_message()
 
+    @pytest.mark.need_review
     def test_user_can_add_product_to_cart(self, browser, link, setup):
         link = link
         page = ProductPage(browser, link)
@@ -33,16 +34,28 @@ class TestUserAddToCartFromProductPage(object):
         page.should_be_added_to_cart()
 
 
-def test_guest_cant_see_success_message_after_adding_product_to_cart(browser):
+@pytest.mark.need_review
+def test_guest_can_add_product_to_cart(browser):
     link = "http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=offer0"
+    page = ProductPage(browser, link)
+    page.open()
+    page.add_product_to_cart()
+    page.solve_quiz_and_get_code()
+    page.should_be_added_to_cart()
+
+
+@pytest.mark.xfail
+def test_guest_cant_see_success_message_after_adding_product_to_cart(browser):
+    link = "http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/"
     page = ProductPage(browser, link)
     page.open()
     page.add_product_to_cart()
     page.should_not_be_success_message()
 
 
+@pytest.mark.xfail
 def test_message_disappeared_after_adding_product_to_cart(browser):
-    link = "http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=offer0"
+    link = "http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/"
     page = ProductPage(browser, link)
     page.open()
     page.add_product_to_cart()
@@ -56,6 +69,7 @@ def test_guest_should_see_login_link_on_product_page(browser):
     page.should_be_login_link()
 
 
+@pytest.mark.need_review
 def test_guest_can_go_to_login_page_from_product_page(browser):
     link = "http://selenium1py.pythonanywhere.com/en-gb/catalogue/the-city-and-the-stars_95/"
     page = ProductPage(browser, link)
@@ -63,6 +77,7 @@ def test_guest_can_go_to_login_page_from_product_page(browser):
     page.go_to_login_page()
 
 
+@pytest.mark.need_review
 def test_guest_cant_see_product_in_cart_opened_from_product_page(browser):
     link = "http://selenium1py.pythonanywhere.com/en-gb/catalogue/the-city-and-the-stars_95/"
     page = ProductPage(browser, link)
